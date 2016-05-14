@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -48,13 +51,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         };
-        ListView listView=(ListView)findViewById(R.id.lstStudent);
-        listView.setOnItemClickListener(itemClickListener);
-        studentRepo = new StudentRepo(this);
-        cursor = studentRepo.getStudentList();
-        customAdapter = new CustomAdapter(MainActivity.this, cursor, 0);
+        //ListView listView=(ListView)findViewById(R.id.lstStudent);
+        //listView.setOnItemClickListener(itemClickListener);
+        //studentRepo = new StudentRepo(this);
+        //cursor = studentRepo.getStudentList();
+        //customAdapter = new CustomAdapter(MainActivity.this, cursor, 0);
+       // listView = (ListView) findViewById(R.id.lstStudent);
+        // listView.setAdapter(customAdapter);
+
+        //Testing
+
         listView = (ListView) findViewById(R.id.lstStudent);
-         listView.setAdapter(customAdapter);
+        listView.setOnItemClickListener(itemClickListener);
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+        databaseAccess.open();
+        List<String> quotes = databaseAccess.getQuotes();
+        databaseAccess.close();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, quotes);
+        this.listView.setAdapter(adapter);
+        //Done Testing
+
+
         ImageView imageView=new ImageView(this);
         imageView.setImageResource(R.drawable.button_action);
 
@@ -80,6 +98,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .addSubActionView(buttonaboutus)
                 .attachTo(actionButton)
                 .build();
+
+
 
     }
 
@@ -140,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getTag().equals(TAG_BOOKMARKS)){
-            startActivity(new Intent(this,HelloWorld.class));
+            startActivity(new Intent(this,Bookmarks.class));
         }
         if (v.getTag().equals(TAG_ABOUT_US)){
 

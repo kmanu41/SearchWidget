@@ -18,13 +18,22 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/sAge"/>
+        android:id="@+id/sAge"
+        android:textSize="32sp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/sEmailid"/>
+        android:id="@+id/sEmailid"
+        android:textSize="320sp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/sfavorite"/>
+    <CheckBox
+        android:id="@+id/favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/favorite"
+        android:onClick="onFavoriteClicked"
+        />
 </LinearLayout>

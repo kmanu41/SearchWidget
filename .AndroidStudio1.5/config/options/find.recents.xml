@@ -3,6 +3,7 @@
     <findStrings>
       <find>ite</find>
       <find>item</find>
+      <find>helo</find>
     </findStrings>
   </component>
 </application>
